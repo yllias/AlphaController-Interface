@@ -173,9 +173,9 @@ export stdcall;
 begin
     D^.Inputs := 3;
     D^.Outputs := 0;
-    D^.NameI[0] := 'Kanal 1';
-    D^.NameI[1] := 'Kanal 2';
-    D^.NameI[2] := 'Kanal 3';
+    D^.NameI[0] := 'Kanal 1 %';
+    D^.NameI[1] := 'Kanal 2 %';
+    D^.NameI[2] := 'Kanal 3 %';
 end;
 
 Procedure CallParameterDialogDLL(D1: PParameterStruct;
@@ -211,7 +211,7 @@ begin
     Result := 1;
   end else
     Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
-    Result := 1;
+    Result := 0;
 end;
 
 procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
@@ -261,7 +261,7 @@ end;
 function GetDLLName: PAnsiChar;
 export stdcall;
 begin
-    GetDLLName := 'aC-Controlblock';
+    GetDLLName := 'AlphaController';
 end;
 
 Procedure WriteToFile(AFileHandle: Word; D: PParameterStruct);

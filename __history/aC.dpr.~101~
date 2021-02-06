@@ -211,7 +211,7 @@ begin
     Result := 1;
   end else
     Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
-    Result := 0;
+    Result := 1;
 end;
 
 procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
@@ -219,16 +219,10 @@ procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
 export stdcall;
 var
     s: string;
-    e: extended;
     F: TextFile;
 begin
-    e := Inputs^[1];
-    s := floattostr(e);
+    s := inttostr(D1^.UserDataPtr.Mode) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
     SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
-    AssignFile(F, 'C:\Test\Data.txt');
-    Rewrite(F);
-    WriteLn(F, s);
-    CloseFile(F);
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;
