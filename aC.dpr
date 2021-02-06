@@ -206,6 +206,11 @@ end;
 function CanSimulateDLL(D: PParameterStruct): integer;
 export stdcall;
 begin
+    if Connect(D^.UserDataPtr.COMPort, D^.UserDataPtr.Baudrate) then with D^.UserDataPtr^ do begin
+    Disconnect(D^.UserDataPtr.COMPort);
+    Result := 1;
+  end else
+    Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
     Result := 1;
 end;
 
@@ -214,8 +219,10 @@ procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
 export stdcall;
 var
     s: string;
+    F: TextFile;
 begin
-    SendString(GetComHandle(D1.UserDataPtr^.ComPort), s)
+    s := inttostr(D1^.UserDataPtr.Mode) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
+    SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;

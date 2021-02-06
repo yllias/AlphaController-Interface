@@ -2,8 +2,8 @@ object aCForm: TaCForm
   Left = 0
   Top = 0
   Caption = 'aCForm'
-  ClientHeight = 167
-  ClientWidth = 283
+  ClientHeight = 163
+  ClientWidth = 278
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

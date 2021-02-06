@@ -1,0 +1,103 @@
+object aCForm: TaCForm
+  Left = 0
+  Top = 0
+  Caption = 'aCForm'
+  ClientHeight = 167
+  ClientWidth = 283
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 185
+    Height = 89
+    Caption = #220'bertragung'
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Top = 29
+      Width = 51
+      Height = 13
+      Caption = 'COM-Port:'
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 56
+      Width = 48
+      Height = 13
+      Caption = 'Baudrate:'
+    end
+    object comUpDown: TUpDown
+      Left = 140
+      Top = 26
+      Width = 16
+      Height = 21
+      Associate = comEdit
+      TabOrder = 0
+    end
+    object comEdit: TEdit
+      Left = 88
+      Top = 26
+      Width = 52
+      Height = 21
+      TabOrder = 1
+      Text = '0'
+    end
+    object baudEdit: TEdit
+      Left = 88
+      Top = 53
+      Width = 73
+      Height = 21
+      TabOrder = 2
+      Text = 'baudEdit'
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 8
+    Top = 103
+    Width = 266
+    Height = 58
+    Caption = 'Steuerung'
+    TabOrder = 1
+    object Mode: TLabel
+      Left = 16
+      Top = 24
+      Width = 30
+      Height = 13
+      Caption = 'Mode:'
+    end
+    object modeEdit: TEdit
+      Left = 88
+      Top = 24
+      Width = 73
+      Height = 21
+      TabOrder = 0
+      Text = 'modeEdit'
+    end
+  end
+  object Button1: TButton
+    Left = 199
+    Top = 25
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object Button2: TButton
+    Left = 199
+    Top = 59
+    Width = 75
+    Height = 25
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+end
