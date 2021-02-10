@@ -22,7 +22,7 @@ type
     PUserData = ^TUserData;
 
     TUserData = record
-        ComPort, Baudrate, Mode: integer;
+        ComPort, Baudrate, Mode, Analog: integer;
     end;
 
     PParameterStruct = ^TParameterStruct;
