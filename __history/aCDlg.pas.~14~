@@ -17,8 +17,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     baudEdit: TEdit;
-    modeRadio: TRadioGroup;
-    adcRadio: TRadioGroup;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
   private
     { Private declarations }
   public

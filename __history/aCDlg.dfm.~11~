@@ -2,8 +2,8 @@ object aCForm: TaCForm
   Left = 0
   Top = 0
   Caption = 'aCForm'
-  ClientHeight = 167
-  ClientWidth = 300
+  ClientHeight = 163
+  ClientWidth = 278
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,34 +34,35 @@ object aCForm: TaCForm
       Height = 13
       Caption = 'Baudrate:'
     end
-    object UpDown1: TUpDown
-      Left = 138
+    object comUpDown: TUpDown
+      Left = 140
       Top = 26
-      Width = 17
+      Width = 16
       Height = 21
+      Associate = comEdit
       TabOrder = 0
     end
-    object Edit1: TEdit
+    object comEdit: TEdit
       Left = 88
       Top = 26
       Width = 52
       Height = 21
       TabOrder = 1
-      Text = 'Edit1'
+      Text = '0'
     end
-    object Edit2: TEdit
+    object baudEdit: TEdit
       Left = 88
       Top = 53
       Width = 73
       Height = 21
       TabOrder = 2
-      Text = 'Edit2'
+      Text = 'baudEdit'
     end
   end
   object GroupBox2: TGroupBox
     Left = 8
     Top = 103
-    Width = 284
+    Width = 266
     Height = 58
     Caption = 'Steuerung'
     TabOrder = 1
@@ -72,38 +73,31 @@ object aCForm: TaCForm
       Height = 13
       Caption = 'Mode:'
     end
-    object ComboBox1: TComboBox
+    object modeEdit: TEdit
       Left = 88
       Top = 24
-      Width = 145
+      Width = 73
       Height = 21
-      Hint = 'Modes'
       TabOrder = 0
-      Text = 'ComboBox1'
-      Items.Strings = (
-        '1 - permanent off'
-        '2 - permanent on'
-        '3 - burst fire low dynamic'
-        '4 - burst fire high dynamic'
-        '5 - phase angle uncorrected'
-        '6 - phase angle voltage'
-        '7 - phase angle power')
+      Text = 'modeEdit'
     end
   end
   object Button1: TButton
-    Left = 216
-    Top = 16
+    Left = 199
+    Top = 25
     Width = 75
     Height = 25
     Caption = 'OK'
+    ModalResult = 1
     TabOrder = 2
   end
   object Button2: TButton
-    Left = 217
-    Top = 47
+    Left = 199
+    Top = 59
     Width = 75
     Height = 25
     Caption = 'Cancel'
+    ModalResult = 2
     TabOrder = 3
   end
 end

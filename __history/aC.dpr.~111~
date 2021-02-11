@@ -22,7 +22,7 @@ type
     PUserData = ^TUserData;
 
     TUserData = record
-        ComPort, Baudrate, Mode: integer;
+        ComPort, Baudrate, Mode, Analog: integer;
     end;
 
     PParameterStruct = ^TParameterStruct;
@@ -173,9 +173,9 @@ export stdcall;
 begin
     D^.Inputs := 3;
     D^.Outputs := 0;
-    D^.NameI[0] := 'Kanal 1';
-    D^.NameI[1] := 'Kanal 2';
-    D^.NameI[2] := 'Kanal 3';
+    D^.NameI[0] := 'Kanal 1 %';
+    D^.NameI[1] := 'Kanal 2 %';
+    D^.NameI[2] := 'Kanal 3 %';
 end;
 
 Procedure CallParameterDialogDLL(D1: PParameterStruct;
@@ -192,12 +192,13 @@ begin
     begin
         comUpDown.Position := D1^.UserDataPtr.ComPort;
         baudEdit.text := IntToStr(D1^.UserDataPtr.Baudrate);
-        modeEdit.text := IntToStr(D1^.UserDataPtr.Mode);
+        modeRadio.ItemIndex := D1^.UserDataPtr.Mode;
+        adcRadio.ItemIndex := D1^.UserDataPtr.Analog;
+
         if ShowModal = mrOK then
         begin
             D1^.UserDataPtr.ComPort := comUpDown.Position;
             D1^.UserDataPtr.Baudrate := strtoint(baudEdit.text);
-            D1^.UserDataPtr.Mode := strtoint(modeEdit.text);
         end;
         Free;
     end;
@@ -211,7 +212,7 @@ begin
     Result := 1;
   end else
     Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
-    Result := 1;
+    Result := 0;
 end;
 
 procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
@@ -221,12 +222,8 @@ var
     s: string;
     F: TextFile;
 begin
-    s := D1^.UserDataPtr.Mode +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(Inputs^[2])+'-'+ floattostr(Inputs^[3]);
+    s := inttostr(D1^.UserDataPtr.Mode) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
     SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
-    AssignFile(F, 'C:\Users\yllkr\Desktop\Test.txt');
-    Rewrite(F);
-    WriteLn(F, s);
-    CloseFile(F);
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;
@@ -252,7 +249,8 @@ begin
     D^.UserDataPtr := new(PUserData);
     D^.UserDataPtr.ComPort := 1;
     D^.UserDataPtr.Baudrate := 9600;
-    D^.UserDataPtr.Mode := 1;
+    D^.UserDataPtr.Mode := 0;
+    D^.UserDataPtr.Analog := 0;
 end;
 
 procedure DisposeUserDLL(D: PParameterStruct);
@@ -265,7 +263,7 @@ end;
 function GetDLLName: PAnsiChar;
 export stdcall;
 begin
-    GetDLLName := 'aC-Controlblock';
+    GetDLLName := 'AlphaController';
 end;
 
 Procedure WriteToFile(AFileHandle: Word; D: PParameterStruct);

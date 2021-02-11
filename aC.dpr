@@ -192,12 +192,15 @@ begin
     begin
         comUpDown.Position := D1^.UserDataPtr.ComPort;
         baudEdit.text := IntToStr(D1^.UserDataPtr.Baudrate);
-        modeEdit.text := IntToStr(D1^.UserDataPtr.Mode);
+        modeRadio.ItemIndex := D1^.UserDataPtr.Mode;
+        adcRadio.ItemIndex := D1^.UserDataPtr.Analog;
+
         if ShowModal = mrOK then
         begin
             D1^.UserDataPtr.ComPort := comUpDown.Position;
             D1^.UserDataPtr.Baudrate := strtoint(baudEdit.text);
-            D1^.UserDataPtr.Mode := strtoint(modeEdit.text);
+            D1^.UserDataPtr.Mode := modeRadio.ItemIndex;
+            D1^.UserDataPtr.Analog := adcRadio.ItemIndex;
         end;
         Free;
     end;
@@ -221,7 +224,7 @@ var
     s: string;
     F: TextFile;
 begin
-    s := inttostr(D1^.UserDataPtr.Mode) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
+    s := inttostr(D1^.UserDataPtr.Mode)+ inttostr(D1^.UserDataPtr.Analog) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
     SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
 end;
 
@@ -248,7 +251,8 @@ begin
     D^.UserDataPtr := new(PUserData);
     D^.UserDataPtr.ComPort := 1;
     D^.UserDataPtr.Baudrate := 9600;
-    D^.UserDataPtr.Mode := 1;
+    D^.UserDataPtr.Mode := 0;
+    D^.UserDataPtr.Analog := 0;
 end;
 
 procedure DisposeUserDLL(D: PParameterStruct);
