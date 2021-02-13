@@ -211,10 +211,12 @@ export stdcall;
 begin
     if Connect(D^.UserDataPtr.COMPort, D^.UserDataPtr.Baudrate) then with D^.UserDataPtr^ do begin
     Disconnect(D^.UserDataPtr.COMPort);
+    Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' wurde hergestellt!'), 'Verbindung erfolgreich!', MB_OK);
     Result := 1;
-  end else
+  end else begin
     Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
     Result := 0;
+  end;
 end;
 
 procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
@@ -224,7 +226,8 @@ var
     s: string;
     F: TextFile;
 begin
-    s := inttostr(D1^.UserDataPtr.Mode)+  +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
+    //s := inttostr(D1^.UserDataPtr.Mode)+ inttostr(D1^.UserDataPtr.Analog) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
+    //s := floattostr(extended(Inputs^[1])) + floattostr(extended(Inputs^[2]));
     SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
 end;
 
