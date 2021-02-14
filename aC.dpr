@@ -16,6 +16,8 @@ uses
     Forms,
     Math,
     Dialogs,
+    CPort,
+    CPortCtl,
     aCDlg in 'aCDlg.pas' {aCForm};
 
 type
@@ -81,6 +83,7 @@ type
     TOutputArray = packed array [1 .. 30] of Extended;
 
 var
+    Port: TComPort;
     Opened: array [1 .. 255] of integer;
     hCom: array [1 .. 255] of THandle;
     I: integer;
@@ -142,18 +145,6 @@ begin
     Result := hCom[ComPort];
 end;
 
-procedure SendString(ComPort: integer; Command: AnsiString);
-var
-    BytesWritten: DWORD;
-    I: integer;
-    Buffer: array [1 .. 1000] of Byte;
-    F: TextFile;
-begin
-    for I := 1 to Length(Command) do
-        Buffer[I] := ord(Command[I]);
-    WriteFile(ComPort, Buffer, Length(Command), BytesWritten, nil);
-end;
-
 procedure GetParameterStruct(D: PParameterStruct);
 export stdcall;
 begin
@@ -209,14 +200,24 @@ end;
 function CanSimulateDLL(D: PParameterStruct): integer;
 export stdcall;
 begin
-    if Connect(D^.UserDataPtr.COMPort, D^.UserDataPtr.Baudrate) then with D^.UserDataPtr^ do begin
-    Disconnect(D^.UserDataPtr.COMPort);
-    Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' wurde hergestellt!'), 'Verbindung erfolgreich!', MB_OK);
-    Result := 1;
-  end else begin
-    Application.MessageBox(PChar('Verbindung mit COM-Port ' +inttostr(D^.UserDataPtr.ComPort)+ ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung', MB_OK or MB_ICONERROR);
-    Result := 0;
-  end;
+    if Connect(D^.UserDataPtr.ComPort, D^.UserDataPtr.Baudrate) then
+        with D^.UserDataPtr^ do
+        begin
+            Disconnect(D^.UserDataPtr.ComPort);
+            Application.MessageBox
+              (PChar('Verbindung mit COM-Port ' +
+              IntToStr(D^.UserDataPtr.ComPort) + ' wurde hergestellt!'),
+              'Verbindung erfolgreich!', MB_OK);
+            Result := 1;
+        end
+    else
+    begin
+        Application.MessageBox(PChar('Verbindung mit COM-Port ' +
+          IntToStr(D^.UserDataPtr.ComPort) +
+          ' konnte nicht hergestellt werden!'), 'Fehler bei Verbindung',
+          MB_OK or MB_ICONERROR);
+        Result := 0;
+    end;
 end;
 
 procedure SimulateDLL(T: Extended; D1: PParameterStruct; Inputs: PInputArray;
@@ -226,10 +227,15 @@ var
     s: string;
     F: TextFile;
 begin
-    //s := inttostr(D1^.UserDataPtr.Mode)+ inttostr(D1^.UserDataPtr.Analog) +'-'+ floattostr(extended(Inputs^[1]))+'-'+ floattostr(extended(Inputs^[2]))+'-'+ floattostr(extended(Inputs^[3]));
-    //s := floattostr(extended(Inputs^[1])) + floattostr(extended(Inputs^[2]));
-    s := '52';
-    SendString(GetComHandle(D1.UserDataPtr^.ComPort), s);
+    Port.ReadStr(s, 20);
+    if (s.Equals('REQ')) then
+    begin
+        Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode) + '-' +
+          IntToStr(D1^.UserDataPtr.Analog) + '-' +
+          floattostr(Extended(Inputs^[1])) + '-' +
+          floattostr(Extended(Inputs^[2])) + '-' +
+          floattostr(Extended(Inputs^[3])) + '#');
+    end;
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;
@@ -238,14 +244,16 @@ export stdcall;
 var
     I: integer;
 begin
-    Connect(D^.UserDataPtr.ComPort, D^.UserDataPtr.Baudrate);
+    Port.Port := 'COM' + IntToStr(D^.UserDataPtr.ComPort);
+    Port.Baudrate := StrToBaudRate(IntToStr(D^.UserDataPtr.Baudrate));
+    Port.Open;
     SimulateDLL(0, D, Inputs, Outputs);
 end;
 
 procedure EndSimulationDLL2(D: PParameterStruct);
 export stdcall;
 begin
-    Disconnect(D^.UserDataPtr.ComPort);
+    Port.Close;
 end;
 
 procedure InitUserDLL(D: PParameterStruct);
@@ -253,6 +261,11 @@ export stdcall;
 begin
     Application.Handle := D^.ParentHWnd;
     D^.UserDataPtr := new(PUserData);
+
+    Port := TComPort.Create(nil);
+    Port.DataBits := dbEight;
+    Port.StopBits := sbOneStopBit;
+
     D^.UserDataPtr.ComPort := 1;
     D^.UserDataPtr.Baudrate := 9600;
     D^.UserDataPtr.Mode := 0;
@@ -263,6 +276,7 @@ procedure DisposeUserDLL(D: PParameterStruct);
 export stdcall;
 begin
     Application.Handle := 0;
+    Port.Free;
     dispose(D^.UserDataPtr);
 end;
 
@@ -349,7 +363,6 @@ exports
     Connect,
     Disconnect,
     GetComHandle,
-    SendString,
     IsDemoDLL;
 
 begin
