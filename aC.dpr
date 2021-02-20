@@ -230,7 +230,7 @@ begin
     Port.ReadStr(s, 20);
     if (s.Equals('REQ')) then
     begin
-        Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode) + '-' +
+        Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode+1) + '-' +
           IntToStr(D1^.UserDataPtr.Analog) + '-' +
           floattostr(Extended(Inputs^[1])) + '-' +
           floattostr(Extended(Inputs^[2])) + '-' +

@@ -2,7 +2,7 @@ object aCForm: TaCForm
   Left = 0
   Top = 0
   Caption = 'aCForm'
-  ClientHeight = 379
+  ClientHeight = 370
   ClientWidth = 272
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object aCForm: TaCForm
     Left = 8
     Top = 8
     Width = 305
-    Height = 89
+    Height = 122
     Caption = #220'bertragung'
     TabOrder = 0
     object Label1: TLabel
@@ -58,19 +58,28 @@ object aCForm: TaCForm
       TabOrder = 2
       Text = 'baudEdit'
     end
+    object Button3: TButton
+      Left = 183
+      Top = 82
+      Width = 75
+      Height = 25
+      Caption = 'Help'
+      TabOrder = 3
+      OnClick = Button3Click
+    end
   end
   object GroupBox2: TGroupBox
     Left = 8
-    Top = 103
+    Top = 136
     Width = 305
-    Height = 274
+    Height = 233
     Caption = 'Steuerung'
     TabOrder = 1
     object modeRadio: TRadioGroup
       Left = 3
       Top = 16
       Width = 153
-      Height = 247
+      Height = 209
       Caption = 'Modus:'
       Items.Strings = (
         '0 - perm. off'
@@ -86,7 +95,7 @@ object aCForm: TaCForm
       Left = 162
       Top = 16
       Width = 96
-      Height = 81
+      Height = 73
       Caption = 'ADC:'
       Items.Strings = (
         '0 - off'
