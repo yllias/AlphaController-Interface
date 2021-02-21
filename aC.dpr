@@ -228,7 +228,7 @@ var
     F: TextFile;
 begin
     Port.ReadStr(s, 20);
-    if (s.Equals('REQ')) then
+    if (s.Equals('r')) then
     begin
         Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode+1) + '-' +
           IntToStr(D1^.UserDataPtr.Analog) + '-' +
