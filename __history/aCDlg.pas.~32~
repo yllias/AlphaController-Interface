@@ -20,6 +20,7 @@ type
         Label2: TLabel;
         baudEdit: TEdit;
         modeRadio: TRadioGroup;
+        adcRadio: TRadioGroup;
         Button3: TButton;
         procedure Button3Click(Sender: TObject);
     private

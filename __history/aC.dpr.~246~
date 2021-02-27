@@ -24,7 +24,7 @@ type
     PUserData = ^TUserData;
 
     TUserData = record
-        ComPort, Baudrate, Mode, Analog: integer;
+        ComPort, Baudrate, Mode: integer;
     end;
 
     PParameterStruct = ^TParameterStruct;
@@ -84,11 +84,14 @@ type
 
 var
     Port: TComPort;
+    oldMode: integer;
+    oldCh1, oldCh2, oldCh3: Extended;
+    newValFlag: Boolean;
     Opened: array [1 .. 255] of integer;
     hCom: array [1 .. 255] of THandle;
     I: integer;
 
-function Connect(ComPort, Baudrate: integer): boolean; export; stdcall;
+function Connect(ComPort, Baudrate: integer): Boolean; export; stdcall;
 var
     DCB: TDCB;
     CommTimeOuts: TCommTimeOuts;
@@ -184,14 +187,12 @@ begin
         comUpDown.Position := D1^.UserDataPtr.ComPort;
         baudEdit.text := IntToStr(D1^.UserDataPtr.Baudrate);
         modeRadio.ItemIndex := D1^.UserDataPtr.Mode;
-        adcRadio.ItemIndex := D1^.UserDataPtr.Analog;
 
         if ShowModal = mrOK then
         begin
             D1^.UserDataPtr.ComPort := comUpDown.Position;
             D1^.UserDataPtr.Baudrate := strtoint(baudEdit.text);
             D1^.UserDataPtr.Mode := modeRadio.ItemIndex;
-            D1^.UserDataPtr.Analog := adcRadio.ItemIndex;
         end;
         Free;
     end;
@@ -227,18 +228,29 @@ var
     s: string;
     F: TextFile;
 begin
-    Port.ReadStr(s, 3);
-    if (s.Equals('REC')) then
+    {if ((D1^.UserDataPtr.Mode + 1 <> oldMode) OR
+      (Extended(Inputs^[1]) <> oldCh1) OR (Extended(Inputs^[2]) <> oldCh2) OR
+      (Extended(Inputs^[3]) <> oldCh3)) then
     begin
-        Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode) + '-' +
-          IntToStr(D1^.UserDataPtr.Analog) + '-' +
+        newValFlag := true;
+    end;}
+    Port.ReadStr(s, 5);
+    if ((s.Equals('r')) AND (newValFlag = true)) then
+    begin
+        Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode + 1) + '-' +
           floattostr(Extended(Inputs^[1])) + '-' +
           floattostr(Extended(Inputs^[2])) + '-' +
           floattostr(Extended(Inputs^[3])) + '#');
-    end;
-    Application.MessageBox(PChar('Verbindung mit COM-Port'), 'Connection',
-          MB_OK);
+        newValFlag := false;
+    end
+    else
+        begin
 
+        end;
+    oldMode := D1^.UserDataPtr.Mode + 1;
+    oldCh1 := Extended(Inputs^[1]);
+    oldCh2 := Extended(Inputs^[2]);
+    oldCh3 := Extended(Inputs^[3]);
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;
@@ -272,7 +284,6 @@ begin
     D^.UserDataPtr.ComPort := 1;
     D^.UserDataPtr.Baudrate := 9600;
     D^.UserDataPtr.Mode := 0;
-    D^.UserDataPtr.Analog := 0;
 end;
 
 procedure DisposeUserDLL(D: PParameterStruct);

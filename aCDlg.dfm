@@ -78,7 +78,7 @@ object aCForm: TaCForm
     object modeRadio: TRadioGroup
       Left = 3
       Top = 16
-      Width = 153
+      Width = 255
       Height = 209
       Caption = 'Modus:'
       Items.Strings = (
@@ -90,17 +90,6 @@ object aCForm: TaCForm
         '5 - burst fire slow'
         '6 - burst fire fast')
       TabOrder = 0
-    end
-    object adcRadio: TRadioGroup
-      Left = 162
-      Top = 16
-      Width = 96
-      Height = 73
-      Caption = 'ADC:'
-      Items.Strings = (
-        '0 - off'
-        '1 - on')
-      TabOrder = 1
     end
   end
   object Button1: TButton
