@@ -63,7 +63,7 @@ object aCForm: TaCForm
       Top = 82
       Width = 75
       Height = 25
-      Caption = 'Help'
+      Caption = 'Hilfe'
       TabOrder = 3
       OnClick = Button3Click
     end
@@ -82,13 +82,13 @@ object aCForm: TaCForm
       Height = 209
       Caption = 'Modus:'
       Items.Strings = (
-        '0 - perm. off'
-        '1 - perm. on'
-        '2 - phase angle linear'
-        '3 - phase angle voltage'
-        '4 - phase angle power'
-        '5 - burst fire slow'
-        '6 - burst fire fast')
+        '0 - permanent AUS'
+        '1 - permanent EIN'
+        '2 - Phasenanschnitt (Phase Angle Control) unkorrigiert'
+        '3 - Phasenanschnitt korr. Spannung'
+        '4 - Phasenanschnitt korr. Leistung'
+        '5 '#8211' Paketsteuerung (Burst Fire Control)'
+        '6 - Paketsteuerung optimiert')
       TabOrder = 0
     end
   end
@@ -106,7 +106,7 @@ object aCForm: TaCForm
     Top = 59
     Width = 75
     Height = 25
-    Caption = 'Cancel'
+    Caption = 'Abbrechen'
     ModalResult = 2
     TabOrder = 3
   end

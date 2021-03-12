@@ -38,7 +38,7 @@ implementation
 procedure TaCForm.Button3Click(Sender: TObject);
 begin
     ShellExecute(Handle, 'open', PChar(ExtractFilePath(Application.ExeName) +
-      'UserDLLs\ac.chm'), nil, nil, SW_SHOW);
+      'UserDLLs\aC.chm'), nil, nil, SW_SHOW);
 end;
 
 end.

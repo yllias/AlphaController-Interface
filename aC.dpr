@@ -235,7 +235,7 @@ begin
         newValFlag := true;
     end;
     Port.ReadStr(s, 5);
-    if ((s.Equals('r')) AND (newValFlag = true)) then
+    if ((s.Equals('r')) {AND (newValFlag = true)}) then
     begin
         Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode + 1) + '-' +
           floattostr(Extended(Inputs^[1])) + '-' +
@@ -258,6 +258,7 @@ begin
     Port.Port := 'COM' + IntToStr(D^.UserDataPtr.ComPort);
     Port.Baudrate := StrToBaudRate(IntToStr(D^.UserDataPtr.Baudrate));
     Port.Open;
+    newValFlag := true;
     SimulateDLL(0, D, Inputs, Outputs);
 end;
 
