@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.691,D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.pas=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aCDlg.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.971,=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.950,C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\aC.dproj=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aC.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.098,C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\aC.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.691,D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.dfm=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aCDlg.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.950,D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aC.dproj=C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\aC.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.098,C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\aC.dproj=C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.691,D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aCDlg.dfm=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.496,=C:\Users\yllkr\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.691,D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\aCDlg.pas=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.971,=D:\5BHEL\_DIPLOMARBEIT\11_Delphi\delphi-repo\ac-delphi\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

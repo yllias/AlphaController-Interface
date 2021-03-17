@@ -240,7 +240,7 @@ begin
         Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode + 1) + '-' +
           floattostr(Extended(Inputs^[1])) + '-' +
           floattostr(Extended(Inputs^[2])) + '-' +
-          floattostr(Extended(Inputs^[3])) + '#');
+          floattostr(Extended(Inputs^[3])) + '-#');
         newValFlag := false;
     end;
     oldMode := D1^.UserDataPtr.Mode + 1;
