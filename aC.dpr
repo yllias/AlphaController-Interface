@@ -228,25 +228,15 @@ var
     s: string;
     F: TextFile;
 begin
-    if ((D1^.UserDataPtr.Mode + 1 <> oldMode) OR
-      (Extended(Inputs^[1]) <> oldCh1) OR (Extended(Inputs^[2]) <> oldCh2) OR
-      (Extended(Inputs^[3]) <> oldCh3)) then
-    begin
-        newValFlag := true;
-    end;
     Port.ReadStr(s, 5);
-    if ((s.Equals('r')) {AND (newValFlag = true)}) then
+    if ((s.Equals('r'))) then
     begin
         Port.WriteStr(IntToStr(D1^.UserDataPtr.Mode + 1) + '-' +
           floattostr(Extended(Inputs^[1])) + '-' +
           floattostr(Extended(Inputs^[2])) + '-' +
           floattostr(Extended(Inputs^[3])) + '-#');
-        newValFlag := false;
     end;
-    oldMode := D1^.UserDataPtr.Mode + 1;
-    oldCh1 := Extended(Inputs^[1]);
-    oldCh2 := Extended(Inputs^[2]);
-    oldCh3 := Extended(Inputs^[3]);
+
 end;
 
 procedure InitSimulationDLL(D: PParameterStruct; Inputs: PInputArray;
