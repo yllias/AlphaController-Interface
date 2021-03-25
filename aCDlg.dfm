@@ -3,7 +3,7 @@ object aCForm: TaCForm
   Top = 0
   Caption = 'aCForm'
   ClientHeight = 370
-  ClientWidth = 272
+  ClientWidth = 313
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -59,7 +59,7 @@ object aCForm: TaCForm
       Text = 'baudEdit'
     end
     object Button3: TButton
-      Left = 183
+      Left = 215
       Top = 82
       Width = 75
       Height = 25
@@ -78,7 +78,7 @@ object aCForm: TaCForm
     object modeRadio: TRadioGroup
       Left = 3
       Top = 16
-      Width = 255
+      Width = 299
       Height = 209
       Caption = 'Modus:'
       Items.Strings = (
@@ -93,7 +93,7 @@ object aCForm: TaCForm
     end
   end
   object Button1: TButton
-    Left = 191
+    Left = 223
     Top = 28
     Width = 75
     Height = 25
@@ -102,7 +102,7 @@ object aCForm: TaCForm
     TabOrder = 2
   end
   object Button2: TButton
-    Left = 191
+    Left = 223
     Top = 59
     Width = 75
     Height = 25

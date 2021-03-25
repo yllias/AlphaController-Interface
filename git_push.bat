@@ -1,4 +1,4 @@
 git add .
-git commit -m"slight changes to control string"
+git commit -m"cyclic update"
 git push
 pause
