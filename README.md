@@ -24,7 +24,7 @@ The Delphi application in this repository was developed to interact with a micro
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/AlphaController-Delphi.git
+    git clone https://github.com/yourusername/AlphaController-Interface.git
     ```
    
 2. Open the project in **Delphi RAD Studio**.
