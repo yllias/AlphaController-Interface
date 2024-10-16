@@ -19,12 +19,6 @@ The Delphi application in this repository was developed to interact with a micro
   - Optimized burst fire control using a Delta-Sigma modulator for better performance.
 - Communication with the microcontroller via **USB** (using UART).
 - Zero-Crossing detection for accurate synchronization with AC mains.
-
-## Project Structure
-
-- **/src**: Contains all the Delphi source code.
-- **/bin**: Contains the compiled executable (if available).
-- **/docs**: Contains additional documentation related to the AlphaController project.
   
 ## Installation and Setup
 
